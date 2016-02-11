@@ -38,3 +38,7 @@
 	background-color: #13654a;
 	width: 100%
 }
+
+.printonly{
+	display:none;
+}
