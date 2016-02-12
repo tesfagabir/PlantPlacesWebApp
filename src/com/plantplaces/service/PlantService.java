@@ -17,19 +17,11 @@ public class PlantService implements IPlantService {
 
 	private List<Plant> allPlants;
 	
-	public IPlantDAO getPlantDAO() {
-		return plantDAO;
-	}
-
-	public void setPlantDAO(IPlantDAO plantDAO) {
-		this.plantDAO = plantDAO;
-	}
-
 	@Override
 	public List<Plant> filterPlants(String filter) {
 
 		if (allPlants == null) {
-			allPlants = plantDAO.fetchPlants();
+			allPlants = getPlantDAO().fetchPlants();
 		}
 
 		// collection we are returning
@@ -37,7 +29,7 @@ public class PlantService implements IPlantService {
 
 		// filter the list
 		// Check all possible plants if they match with the filter text
-		for (Plant plant : returnPlants) {
+		for (Plant plant : allPlants) {
 			if (plant.toString().contains(filter)) {
 				// this plant matches the filter criteria and added to the
 				// collection of returning plants
@@ -47,5 +39,14 @@ public class PlantService implements IPlantService {
 
 		return returnPlants;
 	}
+	
+	public IPlantDAO getPlantDAO() {
+		return plantDAO;
+	}
+
+	public void setPlantDAO(IPlantDAO plantDAO) {
+		this.plantDAO = plantDAO;
+	}
+
 
 }

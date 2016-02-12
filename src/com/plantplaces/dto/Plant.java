@@ -58,7 +58,7 @@ public class Plant {
 	
 	@Override
 	public String toString() {
-		return name;
+		return genus + " " + species + " " + cultivar + " " + common;
 	}
 
 }
