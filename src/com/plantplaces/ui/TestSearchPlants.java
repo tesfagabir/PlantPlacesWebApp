@@ -1,9 +1,8 @@
-package com.plantplaces.ui.test;
+package com.plantplaces.ui;
 
 import org.junit.Test;
 
 import com.plantplaces.dto.Plant;
-import com.plantplaces.ui.SearchPlants;
 
 import junit.framework.TestCase;
 
