@@ -16,7 +16,7 @@ public class PlantService implements IPlantService {
 	private IPlantDAO plantDAO;
 
 	private List<Plant> allPlants;
-	
+
 	@Override
 	public List<Plant> filterPlants(String filter) {
 
@@ -39,7 +39,12 @@ public class PlantService implements IPlantService {
 
 		return returnPlants;
 	}
-	
+
+	public void save(Plant plant) throws Exception {
+		plantDAO.insert(plant);
+
+	}
+
 	public IPlantDAO getPlantDAO() {
 		return plantDAO;
 	}
@@ -47,6 +52,5 @@ public class PlantService implements IPlantService {
 	public void setPlantDAO(IPlantDAO plantDAO) {
 		this.plantDAO = plantDAO;
 	}
-
 
 }
