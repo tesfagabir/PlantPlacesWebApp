@@ -15,7 +15,7 @@ public class Plant {
 	private String species;
 	private String cultivar;
 	private String common;
-	private String guid;
+	private int guid;
 
 	public String getGenus() {
 		return genus;
@@ -57,11 +57,11 @@ public class Plant {
 		this.name = name;
 	}
 	
-	public String getGuid() {
+	public int getGuid() {
 		return guid;
 	}
 
-	public void setGuid(String guid) {
+	public void setGuid(int guid) {
 		this.guid = guid;
 	}
 
