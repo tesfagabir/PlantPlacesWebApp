@@ -1,0 +1,15 @@
+CREATE DATABASE PlantPlaces;
+
+USE PlantPlaces;
+
+CREATE TABLE PLANTS(
+	PLANT_ID INT AUTO_INCREMENT PRIMARY KEY, 
+	GENUS varchar(255) null, 
+	SPECIES varchar(255) null, 
+	CULTIVAR varchar(255) null, 
+	COMMON varchar(255) null
+	);
+
+Create User to access the database...
+
+Add Data to your created table...
