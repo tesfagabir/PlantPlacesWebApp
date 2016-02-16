@@ -41,7 +41,7 @@ public class TestPlantService extends TestCase {
 
 		plantDAO = mock(IPlantDAO.class);
 		
-		// A known set of hardcoded plants.
+		// A known set of hard-coded plants.
 		List<Plant> plantList = constructPlantList();
 		
 		//Tell the mock object to return our known set of hardcoded plants, when requested.

@@ -14,4 +14,6 @@ public interface IPlantDAO {
 	
 	public void delete(Plant plant) throws Exception;
 
+	public List<Plant> fetchPlants(Plant plant);
+
 }
