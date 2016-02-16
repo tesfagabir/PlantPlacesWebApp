@@ -2,17 +2,18 @@ package com.plantplaces.dao;
 
 import java.util.List;
 
+import org.junit.Test;
+
 import com.plantplaces.dto.Plant;
 
-public class TestPlantHbmDAO // extends TestCase: ERROR IN THIS TEST CLASS.
-{
+import junit.framework.TestCase;
+
+public class TestPlantHbmDAO extends TestCase {
 
 	private PlantHbmDAO plantHbmDAO;
-
-	@SuppressWarnings("unused")
 	private List<Plant> plants;
 
-	// @Test
+	@Test
 	public void testFetchByCommonName() {
 		givenPlantDAOInstantiated();
 		whenCommonNameIsRedbud();
@@ -30,10 +31,10 @@ public class TestPlantHbmDAO // extends TestCase: ERROR IN THIS TEST CLASS.
 	}
 
 	private void thenVerifyResults() {
-		// assertTrue(plants.size()>0);
-		// for (Plant plant : plants) {
-		// assertEquals("Redbud", plant.getCommon());
-		// }
+		assertTrue(plants.size() > 0);
+		for (Plant plant : plants) {
+			assertEquals("Redbud", plant.getCommon());
+		}
 	}
 
 }

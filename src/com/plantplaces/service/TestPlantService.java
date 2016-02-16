@@ -1,4 +1,4 @@
-package com.plantplaces.service.test;
+package com.plantplaces.service;
 
 import static org.mockito.Mockito.*;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.plantplaces.dao.IPlantDAO;
 import com.plantplaces.dto.Plant;
-import com.plantplaces.service.PlantService;
 
 import junit.framework.TestCase;
 

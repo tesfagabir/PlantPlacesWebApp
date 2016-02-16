@@ -1,6 +1,5 @@
 package com.plantplaces.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -23,13 +22,17 @@ public class SearchPlants {
 	@Inject
 	private IPlantService plantService;
 
+	private List<Plant> plants;
+
 	public String execute() {
-		if (plant != null && plant.getName().equalsIgnoreCase("Redbud")) {
+		setPlants(plantService.fetchPlants(plant));
+
+		if (plants.size()>0) {
 			return "search";
-			
 		} else {
 			return "noresults";
 		}
+
 	}
 
 	public Plant getPlant() {
@@ -40,8 +43,16 @@ public class SearchPlants {
 		this.plant = plant;
 	}
 	
-	public List<Plant> completePlants(String query){
+	public List<Plant> getPlants() {
+		return plants;
+	}
+	
+	public void setPlants(List<Plant> plants) {
+		this.plants = plants;
+	}
+
+	public List<Plant> completePlants(String query) {
 		return plantService.filterPlants(query);
-		
+
 	}
 }
