@@ -16,7 +16,14 @@
 		<h:outputLabel value="#{plantSearch.name}" />
 	</h2>
 
-	<p:dataTable var="plantResult" value="#{searchPlants.plants}">
+	<p:dataTable id="showPlants" var="plantResult"
+		value="#{searchPlants.plants}" selectionMode="single"
+		rowKey="#{plantResult.guid}">
+		<p:ajax event="rowSelect" listener="#{searchPlants.onRowSelect}" />
+		<p:column headerText="ID">
+			<h:outputText value="#{plantResult.guid}" />
+		</p:column>
+
 		<p:column headerText="Genus">
 			<h:outputText value="#{plantResult.genus}" />
 		</p:column>

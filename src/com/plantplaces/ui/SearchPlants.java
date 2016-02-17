@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
 import org.springframework.context.annotation.Scope;
 
 import com.plantplaces.dto.Plant;
@@ -39,6 +40,18 @@ public class SearchPlants {
 
 	}
 
+	public List<Plant> completePlants(String query) {
+		return plantService.filterPlants(query);
+
+	}
+
+	public void onRowSelect(SelectEvent event) {
+        Plant plant = ((Plant) event.getObject());
+        System.out.println(plant.getCommon());
+        int i = 1;
+        System.out.println(i);
+    }
+
 	public Plant getPlant() {
 		return plant;
 	}
@@ -53,10 +66,5 @@ public class SearchPlants {
 	
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
-	}
-
-	public List<Plant> completePlants(String query) {
-		return plantService.filterPlants(query);
-
 	}
 }
