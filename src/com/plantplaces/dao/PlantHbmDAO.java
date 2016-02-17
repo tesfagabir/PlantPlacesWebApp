@@ -33,7 +33,7 @@ public class PlantHbmDAO implements IPlantDAO {
 		//create the query
 		Query query = session.createQuery("from Plant where common like :common");
 		query.setParameter("common", "%" + plant.getCommon() + "%");
-		query.setProperties(plant);
+		//query.setProperties(plant);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 	

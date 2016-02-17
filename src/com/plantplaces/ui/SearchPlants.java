@@ -24,6 +24,10 @@ public class SearchPlants {
 
 	private List<Plant> plants;
 
+	/**
+	 * Handle button clicks from searches.
+	 * @return the next navigation.
+	 */
 	public String execute() {
 		setPlants(plantService.fetchPlants(plant));
 
