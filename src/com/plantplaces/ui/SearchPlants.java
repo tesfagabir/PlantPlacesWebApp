@@ -1,8 +1,10 @@
 package com.plantplaces.ui;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,6 +28,9 @@ public class SearchPlants {
 	private List<Plant> plants;
 	
 	private Plant selectedPlant;
+	
+	@Inject
+	private SpecimenVO specimenVO;
 
 	/**
 	 * Handle button clicks from searches.
@@ -49,9 +54,17 @@ public class SearchPlants {
 
 	public void onRowSelect(SelectEvent event) {
         Plant plant = ((Plant) event.getObject());
-        System.out.println(plant.getCommon());
-        int i = 1;
-        System.out.println(i);
+        
+               // push the selected plant into SpecimenVO.
+                specimenVO.setPlant(plant);
+                
+                try {
+        			FacesContext.getCurrentInstance().getExternalContext().redirect("specimen.xhtml");
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        
     }
 
 	public Plant getPlant() {
@@ -76,5 +89,13 @@ public class SearchPlants {
 
 	public void setSelectedPlant(Plant selectedPlant) {
 		this.selectedPlant = selectedPlant;
+	}
+
+	public SpecimenVO getSpecimenVO() {
+		return specimenVO;
+	}
+
+	public void setSpecimenVO(SpecimenVO specimenVO) {
+		this.specimenVO = specimenVO;
 	}
 }
