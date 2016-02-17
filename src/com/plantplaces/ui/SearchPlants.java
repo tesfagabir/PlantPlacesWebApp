@@ -24,6 +24,8 @@ public class SearchPlants {
 	private IPlantService plantService;
 
 	private List<Plant> plants;
+	
+	private Plant selectedPlant;
 
 	/**
 	 * Handle button clicks from searches.
@@ -66,5 +68,13 @@ public class SearchPlants {
 	
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
+	}
+
+	public Plant getSelectedPlant() {
+		return selectedPlant;
+	}
+
+	public void setSelectedPlant(Plant selectedPlant) {
+		this.selectedPlant = selectedPlant;
 	}
 }
