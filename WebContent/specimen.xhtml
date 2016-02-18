@@ -14,18 +14,21 @@
 			<em><h:outputLabel value="#{specimenVO.plant.common}" /></em>
 			<h:form>
 				<p:growl id="growl" showDetail="true" sticky="false" />
-				<h:outputLabel value="Latitude" />
-				<p:inputText value="#{specimenVO.specimen.latitude}" />
-				<br />
-				<h:outputLabel value="Longitude" />
-				<p:inputText value="#{specimenVO.specimen.longitude}" />
-				<br />
-				<h:outputLabel value="Planted By" />
-				<p:inputText value="#{specimenVO.specimen.plantedBy}" />
-				<br />
-				<h:outputLabel value="Planted Date" />
-				<p:inputText value="#{specimenVO.specimen.plantedDate}" />
-				<br />
+
+				<div class="inputData">
+					<h:outputLabel value="Latitude" />
+					<p:inputText value="#{specimenVO.specimen.latitude}" />
+					<br />
+					<h:outputLabel value="Longitude" />
+					<p:inputText value="#{specimenVO.specimen.longitude}" />
+					<br />
+					<h:outputLabel value="Planted By" />
+					<p:inputText value="#{specimenVO.specimen.plantedBy}" />
+					<br />
+					<h:outputLabel value="Planted Date" />
+					<p:inputText value="#{specimenVO.specimen.plantedDate}" />
+					<br />
+				</div>
 				<p:commandButton value="Submit" actionListener="#{specimenVO.save}"
 					update="growl" />
 				<br />
