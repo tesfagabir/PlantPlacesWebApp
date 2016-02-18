@@ -3,14 +3,15 @@
 "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <!-- property name="hibernate.connection.password">passwd</property> -->
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/plantplaces</property>
-        <property name="hibernate.connection.username">jonesbr</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="show_sql">true</property>
-        <mapping resource="com/plantplaces/dto/Plant.hbm.xml"></mapping>
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- property name="hibernate.connection.password">passwd</property> -->
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/plantplaces</property>
+		<property name="hibernate.connection.username">jonesbr</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property>
+		<mapping resource="com/plantplaces/dto/Plant.hbm.xml"></mapping>
+		<mapping resource="com/plantplaces/dto/Specimen.hbm.xml"></mapping>
+	</session-factory>
 </hibernate-configuration>

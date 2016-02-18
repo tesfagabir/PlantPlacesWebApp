@@ -7,13 +7,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.plantplaces.dao.IPlantDAO;
+import com.plantplaces.dao.ISpecimenDAO;
 import com.plantplaces.dto.Plant;
+import com.plantplaces.dto.Specimen;
 
 @Named
 public class PlantService implements IPlantService {
 
 	@Inject
 	private IPlantDAO plantDAO;
+	
+	@Inject
+	private ISpecimenDAO specimenDAO;
 
 	private List<Plant> allPlants;
 
@@ -56,10 +61,26 @@ public class PlantService implements IPlantService {
 		this.plantDAO = plantDAO;
 	}
 
+	public ISpecimenDAO getSpecimenDAO() {
+		return specimenDAO;
+	}
+
+	public void setSpecimenDAO(ISpecimenDAO specimenDAO) {
+		this.specimenDAO = specimenDAO;
+	}
+
 	@Override
 	public List<Plant> fetchPlants(Plant plant) {
 		List<Plant> plants = plantDAO.fetchPlants(plant);
 		return plants;
 	}
+	
+	@Override
+	public void save(Specimen specimen) throws Exception{
+		specimenDAO.insert(specimen);
+		
+	}
+	
+	
 
 }

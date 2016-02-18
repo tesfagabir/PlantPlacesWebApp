@@ -11,6 +11,7 @@ public class Specimen {
 	private String longitude;
 	private String plantedBy;
 	private String plantedDate;
+	private String description;
 
 	public int getId() {
 		return id;
@@ -58,6 +59,14 @@ public class Specimen {
 
 	public void setPlantedDate(String plantedDate) {
 		this.plantedDate = plantedDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
