@@ -18,6 +18,8 @@ import com.plantplaces.dto.Photo;
 import com.plantplaces.dto.Plant;
 import com.plantplaces.dto.Specimen;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 @Named
 public class PlantService implements IPlantService {
 
@@ -112,15 +114,21 @@ public class PlantService implements IPlantService {
 
 	@Override
 	public void savePhoto(Photo photo, InputStream inputStream) throws Exception {
-		String path = "/home/qiime/Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
-		path += "/PlantPlaces/WebContent/resources/images";
-		File directory = new File(path);
+		String path1 = "/home/qiime/Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
+		path1 += "/PlantPlaces/WebContent/resources/images";
+		File directory = new File(path1);
 		String uniquesImageName = getUniqueImageName();
 		File file = new File(directory, uniquesImageName);
 		fileDAO.save(inputStream, file);
 		
-		photo.setUri(uniquesImageName);
+		String path2 = "/home/qiime/Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
+		path2 += "/PlantPlaces/WebContent/resources/thumbnails";
+		File thumbnailDirectory = new File(path2);
+		File thumbnailFile = new File(thumbnailDirectory, uniquesImageName);
 		
+		Thumbnails.of(file).size(100, 100).toFile(thumbnailFile);
+		
+		photo.setUri(uniquesImageName);
 		//the unique image name will be saved in the database.
 		photoDAO.save(photo);
 	}
