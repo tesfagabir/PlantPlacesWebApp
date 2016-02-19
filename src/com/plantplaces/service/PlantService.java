@@ -1,7 +1,6 @@
 package com.plantplaces.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,12 +11,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.plantplaces.dao.IFileDAO;
+import com.plantplaces.dao.IPhotoDAO;
 import com.plantplaces.dao.IPlantDAO;
 import com.plantplaces.dao.ISpecimenDAO;
 import com.plantplaces.dto.Photo;
 import com.plantplaces.dto.Plant;
 import com.plantplaces.dto.Specimen;
-import com.sun.faces.facelets.util.Path;
 
 @Named
 public class PlantService implements IPlantService {
@@ -31,6 +30,9 @@ public class PlantService implements IPlantService {
 	@Inject
 	private IFileDAO fileDAO;
 
+	@Inject
+	private IPhotoDAO photoDAO;
+	
 	private List<Plant> allPlants;
 
 	@Override
@@ -60,7 +62,7 @@ public class PlantService implements IPlantService {
 		if (plant.getGenus() == null || plant.getGenus().isEmpty()) {
 			throw new Exception("Genus required");
 		}
-		plantDAO.insert(plant);
+		plantDAO.save(plant);
 
 	}
 
@@ -80,6 +82,14 @@ public class PlantService implements IPlantService {
 		this.specimenDAO = specimenDAO;
 	}
 
+	public IPhotoDAO getPhotoDAO() {
+		return photoDAO;
+	}
+
+	public void setPhotoDAO(IPhotoDAO photoDAO) {
+		this.photoDAO = photoDAO;
+	}
+
 	@Override
 	public List<Plant> fetchPlants(Plant plant) {
 		List<Plant> plants = plantDAO.fetchPlants(plant);
@@ -88,7 +98,7 @@ public class PlantService implements IPlantService {
 
 	@Override
 	public void save(Specimen specimen) throws Exception {
-		specimenDAO.insert(specimen);
+		specimenDAO.save(specimen);
 
 	}
 
@@ -101,7 +111,7 @@ public class PlantService implements IPlantService {
 	}
 
 	@Override
-	public void savePhoto(Photo photo, InputStream inputStream) throws IOException {
+	public void savePhoto(Photo photo, InputStream inputStream) throws Exception {
 		String path = "./Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
 		path += "/PlantPlaces/WebContent/images";
 		File directory = new File(path);
@@ -110,7 +120,9 @@ public class PlantService implements IPlantService {
 		fileDAO.save(inputStream, file);
 		
 		photo.setUri(uniquesImageName);
+		
 		//the unique image name will be saved in the database.
+		photoDAO.save(photo);
 	}
 
 	private String getUniqueImageName() {

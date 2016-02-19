@@ -8,53 +8,46 @@ import org.hibernate.Session;
 
 import com.plantplaces.dto.Plant;
 
-public class PlantHbmDAO implements IPlantDAO {
+public class PlantHbmDAO extends PlantPlacesHbmDAO<Plant> implements IPlantDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Plant> fetchPlants() {
-		
+
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//create the query
+		// create the query
 		Query query = session.createQuery("from Plant");
 
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
-	
+
 		List<Plant> plants = Collections.checkedList(list, Plant.class);
-		
+
 		return plants;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Plant> fetchPlants(Plant plant){
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		//create the query
-		Query query = session.createQuery("from Plant where common like :common");
-		query.setParameter("common", "%" + plant.getCommon() + "%");
-		//query.setProperties(plant);
-		@SuppressWarnings("rawtypes")
-		List list = query.list();
-		List<Plant> plants = list;
-	
-		//List<Plant> plants = Collections.checkedList(list, Plant.class);
-		
-		return plants;
-		
-		
 	}
 
 	@Override
-	public void insert(Plant plant) throws Exception {
+	@SuppressWarnings("unchecked")
+	public List<Plant> fetchPlants(Plant plant) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
-		session.beginTransaction();
-		
+		// create the query
+		Query query = session.createQuery("from Plant where common like :common");
+		query.setParameter("common", "%" + plant.getCommon() + "%");
+		// query.setProperties(plant);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		List<Plant> plants = list;
+
+		// List<Plant> plants = Collections.checkedList(list, Plant.class);
+
+		return plants;
+
+	}
+
+	@Override
+	public void insert(Session session, Plant plant) throws Exception {
+
 		session.save(plant);
-		
-		session.getTransaction().commit();
-		
 
 	}
 

@@ -15,20 +15,15 @@ import com.plantplaces.dto.Specimen;
  *
  */
 @Named
-public class SpecimenHbmDAO implements ISpecimenDAO {
+public class SpecimenHbmDAO extends PlantPlacesHbmDAO<Specimen> implements ISpecimenDAO {
 	
 	/* (non-Javadoc)
 	 * @see com.plantplaces.dao.ISpecimenDAO#insert(com.plantplaces.dto.Specimen)
 	 */
 	@Override
-	public void insert(Specimen specimen) throws Exception {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		
-		session.beginTransaction();
-		
+	public void insert(Session session, Specimen specimen) throws Exception {
+
 		session.save(specimen);
-		
-		session.getTransaction().commit();
 	}
 	
 	@Override
@@ -41,7 +36,8 @@ public class SpecimenHbmDAO implements ISpecimenDAO {
  		@SuppressWarnings("rawtypes")
  		List list = query.list();
  		
- 		List<Specimen> specimens = Collections.checkedList(list, Specimen.class);
+ 		@SuppressWarnings("unchecked")
+		List<Specimen> specimens = Collections.checkedList(list, Specimen.class);
  		
  		return specimens;
  	}

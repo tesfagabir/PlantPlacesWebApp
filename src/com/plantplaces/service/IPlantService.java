@@ -62,6 +62,6 @@ public interface IPlantService {
 	 * @param inputStream
 	 * @throws IOException
 	 */
-	void savePhoto(Photo photo, InputStream inputStream) throws IOException, IOException;
+	void savePhoto(Photo photo, InputStream inputStream) throws Exception;
 
 }
