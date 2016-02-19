@@ -1,5 +1,6 @@
 package com.plantplaces.service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,6 +21,7 @@ import com.plantplaces.dto.Plant;
 import com.plantplaces.dto.Specimen;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 @Named
 public class PlantService implements IPlantService {
@@ -128,6 +131,10 @@ public class PlantService implements IPlantService {
 		
 		Thumbnails.of(file).size(100, 100).toFile(thumbnailFile);
 		
+		BufferedImage watermark = ImageIO.read(new File(directory, "watermark.png"));
+ 		
+ 		Thumbnails.of(file).scale(1).watermark(Positions.BOTTOM_RIGHT, watermark, 0.9f).toFile(file);
+ 		
 		photo.setUri(uniquesImageName);
 		//the unique image name will be saved in the database.
 		photoDAO.save(photo);
