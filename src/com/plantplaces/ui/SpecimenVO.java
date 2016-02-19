@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
 import org.springframework.context.annotation.Scope;
 
 import com.plantplaces.dto.Plant;
@@ -12,17 +13,16 @@ import com.plantplaces.service.IPlantService;
 
 @Named
 @ManagedBean
-@Scope("request")
+@Scope("session")
 public class SpecimenVO {
 
 	private Plant plant;
 
 	@Inject
 	private Specimen specimen;
-	
+
 	@Inject
 	private IPlantService plantService;
-	
 
 	public Plant getPlant() {
 		return plant;
@@ -30,6 +30,13 @@ public class SpecimenVO {
 
 	public void setPlant(Plant plant) {
 		this.plant = plant;
+
+		loadSpecimens();
+	}
+
+	private void loadSpecimens() {
+		// TODO Auto-generated method stub
+		plantService.loadSpecimens(plant);
 	}
 
 	public Specimen getSpecimen() {
@@ -51,7 +58,7 @@ public class SpecimenVO {
 	public String save() {
 		// Set the foreign key to plant id before saving
 		specimen.setPlantId(plant.getGuid());
-		
+
 		try {
 			plantService.save(specimen);
 			return "specimensaved";
@@ -60,8 +67,15 @@ public class SpecimenVO {
 			e.printStackTrace();
 			return "failed";
 		}
-		
-		
+
 	}
+	
+    public void onRowSelect(SelectEvent event) {
+         Specimen specimen = ((Specimen) event.getObject());
+      
+         // push the selected plant into SpecimenVO.
+         setSpecimen(specimen);
+                 
+     }
 
 }

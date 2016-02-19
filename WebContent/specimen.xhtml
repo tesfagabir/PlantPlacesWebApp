@@ -12,6 +12,32 @@
 		<ui:define name="content">
 			<h1>Specimen</h1>
 			<em><h:outputLabel value="#{specimenVO.plant.common}" /></em>
+
+			<p:dataTable id="showSpecimens" var="specimenResult"
+				value="#{specimenVO.plant.specimens}" selectionMode="single"
+				rowKey="#{specimenResult.id}">
+				<p:ajax event="rowSelect" listener="#{specimenVO.onRowSelect}" />
+				<p:column headerText="ID">
+					<h:outputText value="#{specimenResult.id}" />
+				</p:column>
+				<p:column headerText="Latitude">
+					<h:outputText value="#{specimenResult.latitude}" />
+				</p:column>
+				<p:column headerText="Longitude">
+					<h:outputText value="#{specimenResult.longitude}" />
+				</p:column>
+				<p:column headerText="Description">
+					<h:outputText value="#{specimenResult.description}" />
+				</p:column>
+				<p:column headerText="Planted By">
+					<h:outputText value="#{specimenResult.plantedBy}" />
+				</p:column>
+				<p:column headerText="Planted Date">
+					<h:outputText value="#{specimenResult.plantedDate}" />
+				</p:column>
+
+			</p:dataTable>
+
 			<h:form>
 				<p:growl id="growl" showDetail="true" sticky="false" />
 

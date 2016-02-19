@@ -16,7 +16,7 @@ public class PlantService implements IPlantService {
 
 	@Inject
 	private IPlantDAO plantDAO;
-	
+
 	@Inject
 	private ISpecimenDAO specimenDAO;
 
@@ -74,13 +74,19 @@ public class PlantService implements IPlantService {
 		List<Plant> plants = plantDAO.fetchPlants(plant);
 		return plants;
 	}
-	
+
 	@Override
-	public void save(Specimen specimen) throws Exception{
+	public void save(Specimen specimen) throws Exception {
 		specimenDAO.insert(specimen);
-		
+
 	}
-	
-	
+
+	@Override
+	public void loadSpecimens(Plant plant) {
+		// TODO Auto-generated method stub
+		List<Specimen> specimens = specimenDAO.fetchByPlantId(plant.getGuid());
+		plant.setSpecimens(specimens);
+
+	}
 
 }
