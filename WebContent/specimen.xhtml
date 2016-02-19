@@ -60,6 +60,16 @@
 				<br />
 
 			</h:form>
+
+			<h:form enctype="multipart/form-data">
+				<p:growl id="messages" showDetail="true" />
+
+				<p:fileUpload value="#{specimenVO.file}" mode="simple"
+					skinSimple="true" />
+
+				<p:commandButton value="Submit" ajax="false"
+					actionListener="#{specimenVO.upload}" />
+			</h:form>
 			<h4>Specimen Management</h4>
 
 			<h:link value="Contact Us" outcome="contactUs" />
