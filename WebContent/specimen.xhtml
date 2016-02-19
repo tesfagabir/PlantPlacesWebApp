@@ -61,15 +61,24 @@
 
 			</h:form>
 
-			<h:form enctype="multipart/form-data">
-				<p:growl id="messages" showDetail="true" />
+			<img src="images/image.jpg"></img>
+			<p:fieldset legend="Add a Photo to the Specimen">
+				<h:form enctype="multipart/form-data">
+					<p:growl id="messages" showDetail="true" />
 
-				<p:fileUpload value="#{specimenVO.file}" mode="simple"
-					skinSimple="true" />
+					<p:outputLabel value="Date Taken" />
+					<p:calendar id="dateTaken" value="#{specimenVO.photo.dateTaken}" />
+					<br />
+					<p:outputLabel value="Contributor" />
+					<p:inputText value="#{specimenVO.photo.contributor}" />
+					<br />
+					<p:fileUpload value="#{specimenVO.file}" mode="simple"
+						skinSimple="true" />
 
-				<p:commandButton value="Submit" ajax="false"
-					actionListener="#{specimenVO.upload}" />
-			</h:form>
+					<p:commandButton value="Submit" ajax="false"
+						actionListener="#{specimenVO.upload}" />
+				</h:form>
+			</p:fieldset>
 			<h4>Specimen Management</h4>
 
 			<h:link value="Contact Us" outcome="contactUs" />

@@ -29,6 +29,9 @@ public class SpecimenVO {
 	private Specimen specimen;
 
 	@Inject
+	private Photo photo;
+
+	@Inject
 	private IPlantService plantService;
 
 	private UploadedFile file;
@@ -56,6 +59,14 @@ public class SpecimenVO {
 		this.specimen = specimen;
 	}
 
+	public Photo getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(Photo photo) {
+		this.photo = photo;
+	}
+
 	public IPlantService getPlantService() {
 		return plantService;
 	}
@@ -80,7 +91,6 @@ public class SpecimenVO {
 			plantService.save(specimen);
 			return "specimensaved";
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "failed";
 		}
@@ -103,24 +113,27 @@ public class SpecimenVO {
 	}
 
 	public void upload() {
-		if (file != null) {
+		if (specimen.getId() == 0) {
+			FacesMessage message = new FacesMessage(
+					"You have not yet selected a specimen.  Please select one before saving the image.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else if (file != null) {
 			try {
 				InputStream inputstream = file.getInputstream();
-				Photo photo = new Photo();
-				// pass the photo data and the photo metadata to our business
+				// set the specimen ID.
+				photo.setSpecimenId(specimen.getId());
+
+				// pass the photo data and the photo meta-data to our business
 				// logic layer.
-				plantService.savePhoto(photo, inputstream);
+				plantService.savePhoto(getPhoto(), inputstream);
 
 				FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				FacesMessage message = new FacesMessage("There was a problem, your file was not uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
-
 		}
-
 	}
 }
