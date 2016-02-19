@@ -112,8 +112,8 @@ public class PlantService implements IPlantService {
 
 	@Override
 	public void savePhoto(Photo photo, InputStream inputStream) throws Exception {
-		String path = "./Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
-		path += "/PlantPlaces/WebContent/images";
+		String path = "/home/qiime/Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
+		path += "/PlantPlaces/WebContent/resources/images";
 		File directory = new File(path);
 		String uniquesImageName = getUniqueImageName();
 		File file = new File(directory, uniquesImageName);
@@ -135,5 +135,10 @@ public class PlantService implements IPlantService {
  		
  		return imagePrefix + middle + imageSuffix;
 	}
+	
+	@Override
+ 	public List<Photo> fetchPhotos(Specimen specimen) {
+ 		return photoDAO.fetchPhotos(specimen);
+ }
 
 }

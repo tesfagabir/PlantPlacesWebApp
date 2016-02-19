@@ -64,4 +64,5 @@ public interface IPlantService {
 	 */
 	void savePhoto(Photo photo, InputStream inputStream) throws Exception;
 
+	List<Photo> fetchPhotos(Specimen specimen);
 }

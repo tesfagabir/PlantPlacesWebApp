@@ -2,6 +2,7 @@ package com.plantplaces.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -34,6 +35,8 @@ public class SpecimenVO {
 	@Inject
 	private IPlantService plantService;
 
+	private List<Photo> photos;
+	
 	private UploadedFile file;
 
 	public Plant getPlant() {
@@ -73,6 +76,14 @@ public class SpecimenVO {
 
 	public void setPlantService(IPlantService plantService) {
 		this.plantService = plantService;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 
 	public UploadedFile getFile() {
