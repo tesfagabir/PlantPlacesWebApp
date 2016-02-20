@@ -38,6 +38,9 @@ public class PlantService implements IPlantService {
 	@Inject
 	private IPhotoDAO photoDAO;
 	
+	@Inject
+	private JMSBean jmsBean;
+	
 	private List<Plant> allPlants;
 
 	@Override
@@ -95,6 +98,14 @@ public class PlantService implements IPlantService {
 		this.photoDAO = photoDAO;
 	}
 
+	public JMSBean getJmsBean() {
+		return jmsBean;
+	}
+
+	public void setJmsBean(JMSBean jmsBean) {
+		this.jmsBean = jmsBean;
+	}
+
 	@Override
 	public List<Plant> fetchPlants(Plant plant) {
 		List<Plant> plants = plantDAO.fetchPlants(plant);
@@ -123,6 +134,8 @@ public class PlantService implements IPlantService {
 		String uniquesImageName = getUniqueImageName();
 		File file = new File(directory, uniquesImageName);
 		fileDAO.save(inputStream, file);
+		
+		jmsBean.submit(file.toString());
 		
 		String path2 = "/home/qiime/Downloads/JavaFullStackWeb/MyJavaFullStackEnterpriseWeb";
 		path2 += "/PlantPlaces/WebContent/resources/thumbnails";
