@@ -143,11 +143,7 @@ public class PlantService implements IPlantService {
 		File thumbnailFile = new File(thumbnailDirectory, uniquesImageName);
 		
 		Thumbnails.of(file).size(100, 100).toFile(thumbnailFile);
-		
-		BufferedImage watermark = ImageIO.read(new File(directory, "watermark.png"));
- 		
- 		Thumbnails.of(file).scale(1).watermark(Positions.BOTTOM_RIGHT, watermark, 0.9f).toFile(file);
- 		
+		 		
 		photo.setUri(uniquesImageName);
 		//the unique image name will be saved in the database.
 		photoDAO.save(photo);

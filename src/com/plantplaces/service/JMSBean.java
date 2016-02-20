@@ -12,19 +12,19 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 @Named
 public class JMSBean {
-	
+
 	@Inject
 	ActiveMQConnectionFactory jmsConnectionFactory;
-	
+
 	public void submit(String message) throws Exception {
 		Connection connection = jmsConnectionFactory.createConnection();
-		 		connection.start();
-		 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		 		Queue photoQueue = session.createQueue("photos");
-		 		MessageProducer producer = session.createProducer(photoQueue);
-		 		TextMessage textMessage = session.createTextMessage(message);
-		 		producer.send(textMessage);
-		 		connection.stop();
+		connection.start();
+		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		Queue photoQueue = session.createQueue("photos");
+		MessageProducer producer = session.createProducer(photoQueue);
+		TextMessage textMessage = session.createTextMessage(message);
+		producer.send(textMessage);
+		connection.stop();
 	}
 
 }
