@@ -38,9 +38,17 @@ public class PlantJSONServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String filter = req.getParameter("filter");
+
 		// our search criteria.
 		Plant searchPlant = new Plant();
-		searchPlant.setCommon("e");
+
+		if (filter != null && !filter.isEmpty()) {
+			searchPlant.setCommon(filter);
+		} else {
+			searchPlant.setCommon("e");
+		}
 
 		// get a list of plants that match the result
 		List<Plant> plants = getPlantService().fetchPlants(searchPlant);
